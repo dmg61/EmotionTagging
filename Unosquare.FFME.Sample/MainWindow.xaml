@@ -7,7 +7,7 @@
         xmlns:ffme="clr-namespace:Unosquare.FFME;assembly=ffme"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" MinHeight="720" Height="0" MinWidth="1280" Width="0"
-        Title="{Binding ElementName=window, Path=WindowTitle}" Background="Black">
+        Title="{Binding ElementName=window, Path=WindowTitle}" Background="Black" Icon="ffmpeg.ico">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,6 +15,7 @@
                     <local:TimeSpanToSecondsConverter x:Key="TimeSpanToSecondsConverter" />
                     <local:TimeSpanFormatter x:Key="TimeSpanFormatter" />
                     <local:PercentageFormatter x:Key="PercentageFormatter" />
+                    <local:BooleanToVisibilityMultiConverter x:Key="BooleanToVisibilityMultiConverter" />
                 </ResourceDictionary>
                 <ResourceDictionary Source="Icons.xaml" />
                 <ResourceDictionary Source="Styles.xaml" />
@@ -154,16 +155,22 @@
 
                     <ToggleButton Name="EmotionsButton" Style="{DynamicResource ModeToggleButtonStyle}">
                         <Path Stretch="Uniform" Data="{Binding Source={StaticResource SmileIcon}, Path=Data}" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}" />
-                        <!--<ToggleButton.Visibility>
-                            --><!--<MultiBinding Converter="BooleanToVisibilityMultiConverter">
-                                <Binding Path="IsPropA" />
-                                <Binding Path="IsPropB" />
-                            </MultiBinding>--><!--
-                        </ToggleButton.Visibility>-->
+                        <ToggleButton.Visibility>
+                            <MultiBinding Converter="{StaticResource BooleanToVisibilityMultiConverter}">
+                                <Binding Path="OpenButtonVisibility" ElementName="window"/>
+                                <Binding Path="IsChecked" ElementName="ModeButton"/>
+                            </MultiBinding>
+                        </ToggleButton.Visibility>
                     </ToggleButton>
 
-                    <ToggleButton Name="EmotionListButton" Style="{DynamicResource ModeToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
+                    <ToggleButton Name="EmotionListButton" Style="{DynamicResource ModeToggleButtonStyle}">
                         <Path Stretch="Uniform" Data="{Binding Source={StaticResource LayerIcon}, Path=Data}" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}" />
+                        <ToggleButton.Visibility>
+                            <MultiBinding Converter="{StaticResource BooleanToVisibilityMultiConverter}">
+                                <Binding Path="OpenButtonVisibility" ElementName="window"/>
+                                <Binding Path="IsChecked" ElementName="ModeButton"/>
+                            </MultiBinding>
+                        </ToggleButton.Visibility>
                     </ToggleButton>
 
                     <Popup Name="OpenMediaPopup2" IsOpen="{Binding IsChecked, ElementName=OpenMenuButton, Mode=TwoWay}" StaysOpen="False" 

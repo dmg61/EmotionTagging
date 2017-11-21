@@ -800,7 +800,7 @@
                 state = "Ready";
             }
 
-            window.Title = $"{title} - {state} - Unosquare FFME Play v{v.Major}.{v.Minor}.{v.Build}.{v.Revision}";
+            window.Title = $"{title} - {state} - Astra Player";
         }
 
         /// <summary>
@@ -1041,20 +1041,6 @@
             HistoryItems.Clear();
             for (var entryIndex = Config.HistoryEntries.Count - 1; entryIndex >= 0; entryIndex--)
                 HistoryItems.Add(Config.HistoryEntries[entryIndex]);
-        }
-
-
-        public class BooleanToVisibilityMultiConverter : IMultiValueConverter
-        {
-            public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-            {
-                return values.OfType<bool>().Any(b => b) ? Visibility.Visible : Visibility.Hidden;
-            }
-
-            public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-            {
-                throw new NotImplementedException();
-            }
         }
         #endregion
 
