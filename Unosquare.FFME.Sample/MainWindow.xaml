@@ -163,7 +163,7 @@
                         </ToggleButton.Visibility>
                     </ToggleButton>
 
-                    <ToggleButton Name="EmotionListButton" Style="{DynamicResource ModernToggleButtonStyle}">
+                    <ToggleButton Name="EmotionTableButton" Style="{DynamicResource ModernToggleButtonStyle}">
                         <Path Stretch="Uniform" Data="{Binding Source={StaticResource LayerIcon}, Path=Data}" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}" />
                         <ToggleButton.Visibility>
                             <MultiBinding Converter="{StaticResource BooleanToVisibilityMultiConverter}">
@@ -173,8 +173,8 @@
                         </ToggleButton.Visibility>
                     </ToggleButton>
 
-                    <Popup Name="EmotionsPopup" IsOpen="{Binding IsChecked, ElementName=EmotionsButton, Mode=TwoWay}" 
-                           PopupAnimation="Fade" AllowsTransparency="True" Placement="MousePoint" PlacementTarget="{Binding ElementName=OpenMenuButton}"
+                    <Popup Name="EmotionsPopup" MouseDown="EmotionsPopup_MouseDown" IsOpen="{Binding IsChecked, ElementName=EmotionsButton, Mode=TwoWay}" 
+                           PopupAnimation="Fade" AllowsTransparency="True" PlacementTarget="{Binding ElementName=EmotionsButton}" Placement="Right"
                            VerticalOffset="-70" HorizontalOffset="-1180">
                         <Popup.Resources>
                             <Style TargetType="TextBlock">
@@ -183,9 +183,9 @@
                                 <Setter Property="TextAlignment" Value="Center" />
                             </Style>
                         </Popup.Resources>
-                        <Border Background="#FF1F1F1F" BorderBrush="#FF767676" BorderThickness="1" Margin="0">
-                            <DockPanel Name="EmotionControl" HorizontalAlignment="Center" Width="420" Margin="0" >
 
+                        <Border Background="#FF1F1F1F" BorderBrush="#FF767676" BorderThickness="1" Margin="0">
+                            <DockPanel Name="EmotionControl" HorizontalAlignment="Center" Width="425" Margin="0" >
                                 <ToggleButton Name="AngerButton" Style="{DynamicResource EmotionToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
                                     <Grid>
                                         <Grid.RowDefinitions>
@@ -256,8 +256,38 @@
                                         <TextBlock Text="Surprise" HorizontalAlignment="Center" Grid.Row="1" />
                                     </Grid>
                                 </ToggleButton>
-                                
+                                <Thumb Name="EmotionsWindowThumb" DragDelta="EmotionsWindowsThums_DragDelta" Background="#FF1F1F1F" Width="5" Height="60" />
                             </DockPanel>
+                        </Border>
+                    </Popup>
+
+                    <Popup Name="EmotionTablePopup" MouseDown="EmotionTablePopup_MouseDown" IsOpen="{Binding IsChecked, ElementName=EmotionListButton, Mode=TwoWay}" 
+                           PopupAnimation="Fade" AllowsTransparency="True" PlacementTarget="{Binding ElementName=EmotionListButton}" Placement="Right"
+                           VerticalOffset="-70" HorizontalOffset="-1180">
+                        <Popup.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="{StaticResource CustomSliderHighlightBrush}" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="TextAlignment" Value="Center" />
+                            </Style>
+                        </Popup.Resources>
+
+                        <Border Background="#FF1F1F1F" BorderBrush="#FF767676" BorderThickness="1" Margin="0">
+                            <Grid Width="200">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="Table tagged emotions" Padding="10,10,0,0" VerticalAlignment="Bottom" />
+                                <ComboBox Grid.Row="1" BorderThickness="0" x:Name="UrlTextBox2" Margin="10" Padding="4" FontSize="15" IsEditable="True" StaysOpenOnEdit="True" />
+                                <Button HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="2" Style="{DynamicResource ModernButtonStyle}" Command="{Binding ElementName=window, Path=OpenCommand}">
+                                    <Path Stretch="Uniform" Data="{Binding Source={StaticResource OpenIcon}, Path=Data}" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+                                </Button>
+                            </Grid>
                         </Border>
                     </Popup>
                 </DockPanel>
