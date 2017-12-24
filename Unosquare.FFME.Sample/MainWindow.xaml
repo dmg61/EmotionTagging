@@ -186,7 +186,7 @@
 
                         <Border Background="#FF1F1F1F" BorderBrush="#FF767676" BorderThickness="1" Margin="0">
                             <DockPanel Name="EmotionControl" HorizontalAlignment="Center" Width="425" Margin="0" >
-                                <ToggleButton Name="AngerButton" Style="{DynamicResource EmotionToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
+                                <ToggleButton Name="AngerButton" Click="EmotionButton_Click" Style="{DynamicResource EmotionToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
@@ -194,9 +194,9 @@
                                         </Grid.RowDefinitions>
                                         <Rectangle Fill="{StaticResource EmotionAngerIcon}" Width="30" Height="30" />
                                         <TextBlock Text="Anger" HorizontalAlignment="Center" Grid.Row="1" />
-                                    </Grid> 
+                                    </Grid>
                                 </ToggleButton>
-                                <ToggleButton Name="ContemptButton" Style="{DynamicResource EmotionToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
+                                <ToggleButton Name="ContemptButton" Click="EmotionButton_Click" Style="{DynamicResource EmotionToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
@@ -206,7 +206,7 @@
                                         <TextBlock Text="Contempt" HorizontalAlignment="Center" Grid.Row="1" />
                                     </Grid>
                                 </ToggleButton>
-                                <ToggleButton Name="DisgustButton" Style="{DynamicResource EmotionToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
+                                <ToggleButton Name="DisgustButton" Click="EmotionButton_Click" Style="{DynamicResource EmotionToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
@@ -216,7 +216,7 @@
                                         <TextBlock Text="Disgust" HorizontalAlignment="Center" Grid.Row="1" />
                                     </Grid>
                                 </ToggleButton>
-                                <ToggleButton Name="FearButton" Style="{DynamicResource EmotionToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
+                                <ToggleButton Name="FearButton" Click="EmotionButton_Click" Style="{DynamicResource EmotionToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
@@ -226,7 +226,7 @@
                                         <TextBlock Name="Text" Text="Fear" HorizontalAlignment="Center" Grid.Row="1" />
                                     </Grid>
                                 </ToggleButton>
-                                <ToggleButton Name="HappinessButton" Style="{DynamicResource EmotionToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
+                                <ToggleButton Name="HappinessButton" Click="EmotionButton_Click" Style="{DynamicResource EmotionToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
@@ -236,7 +236,7 @@
                                         <TextBlock Text="Happiness" HorizontalAlignment="Center" Grid.Row="1" />
                                     </Grid>
                                 </ToggleButton>
-                                <ToggleButton Name="SadnessButton" Style="{DynamicResource EmotionToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
+                                <ToggleButton Name="SadnessButton" Click="EmotionButton_Click" Style="{DynamicResource EmotionToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
@@ -246,7 +246,7 @@
                                         <TextBlock Text="Sadness" HorizontalAlignment="Center" Grid.Row="1" />
                                     </Grid>
                                 </ToggleButton>
-                                <ToggleButton Name="SurpriseButton" Style="{DynamicResource EmotionToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
+                                <ToggleButton Name="SurpriseButton" Click="EmotionButton_Click" Style="{DynamicResource EmotionToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition />
@@ -261,9 +261,9 @@
                         </Border>
                     </Popup>
 
-                    <Popup Name="EmotionTablePopup" MouseDown="EmotionTablePopup_MouseDown" IsOpen="{Binding IsChecked, ElementName=EmotionListButton, Mode=TwoWay}" 
-                           PopupAnimation="Fade" AllowsTransparency="True" PlacementTarget="{Binding ElementName=EmotionListButton}" Placement="Right"
-                           VerticalOffset="-70" HorizontalOffset="-1180">
+                    <Popup Name="EmotionTablePopup" MouseDown="EmotionTablePopup_MouseDown" IsOpen="{Binding IsChecked, ElementName=EmotionTableButton, Mode=TwoWay}" 
+                           PopupAnimation="Fade" AllowsTransparency="True" PlacementTarget="{Binding ElementName=EmotionTableButton}" Placement="Right"
+                           VerticalOffset="-200" HorizontalOffset="40">
                         <Popup.Resources>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Foreground" Value="{StaticResource CustomSliderHighlightBrush}" />
@@ -273,21 +273,26 @@
                         </Popup.Resources>
 
                         <Border Background="#FF1F1F1F" BorderBrush="#FF767676" BorderThickness="1" Margin="0">
-                            <Grid Width="200">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Text="Table tagged emotions" Padding="10,10,0,0" VerticalAlignment="Bottom" />
-                                <ComboBox Grid.Row="1" BorderThickness="0" x:Name="UrlTextBox2" Margin="10" Padding="4" FontSize="15" IsEditable="True" StaysOpenOnEdit="True" />
-                                <Button HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="2" Style="{DynamicResource ModernButtonStyle}" Command="{Binding ElementName=window, Path=OpenCommand}">
-                                    <Path Stretch="Uniform" Data="{Binding Source={StaticResource OpenIcon}, Path=Data}" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
-                                </Button>
-                            </Grid>
+                            <StackPanel Width="200">
+                                <Thumb x:Name="EmotionTableWindowsThumb" Background="Transparent" HorizontalAlignment="Left" Width="200"/>
+                                <TextBlock Text="Table tagged emotions" Padding="10,10,0,0" VerticalAlignment="Bottom" />
+                                <DataGrid x:Name="EmotionTable" Height="50" Margin="10,10,10,0" Background="#FF1F1F1F" ItemsSource="{Binding emotionTable}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding Path=EmotionItem.emotion}" Foreground="Black" Width="60" Header="Emotion" IsReadOnly="false" />
+                                        <DataGridTextColumn Binding="{Binding}" Foreground="Black" Width="60" Header="Start" IsReadOnly="false" />
+                                        <DataGridTextColumn Binding="{Binding}" Foreground="Black" Width="60" Header="End" IsReadOnly="false" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+
+                                <DockPanel HorizontalAlignment="Right">
+                                    <Button HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="2" Grid.Column="0" Style="{DynamicResource ModernButtonStyle}" Command="{Binding OpenCommand, ElementName=window}">
+                                        <Path Stretch="Uniform" Data="{Binding Data, Source={StaticResource OpenIcon}}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+                                    </Button>
+                                    <Button HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="2" Grid.Column="1" Style="{DynamicResource ModernButtonStyle}" Command="{Binding OpenCommand, ElementName=window}">
+                                        <Path Stretch="Uniform" Data="{Binding Data, Source={StaticResource OpenIcon}}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+                                    </Button>
+                                </DockPanel>
+                            </StackPanel>
                         </Border>
                     </Popup>
                 </DockPanel>

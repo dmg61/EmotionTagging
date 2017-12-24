@@ -56,6 +56,12 @@
 
         #endregion
 
+        #region Emotions Variables
+
+        private ObservableCollection<EmotionItem> emotionTable { get; set; }
+
+        #endregion
+
         #region Commands
 
         /// <summary>
@@ -311,6 +317,8 @@
         {
             tobiiHost = new Host();
             gazePointDataStream = tobiiHost.Streams.CreateGazePointDataStream();
+            emotionTable = new ObservableCollection<EmotionItem>();
+            emotionTable.Add(new EmotionItem(Emotion.HAPPINESS, new TimeSpan(), new TimeSpan()));
 
             var screenBoundsState = tobiiHost.States.GetScreenBoundsAsync().Result;
             var screenBounds = screenBoundsState.IsValid
@@ -1000,6 +1008,32 @@
             EmotionsWindowThumb.RaiseEvent(e);
         }
 
+        /// <summary>
+        /// Handles the DragDelta event of the DebugWindowThumb control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.Controls.Primitives.DragDeltaEventArgs"/> instance containing the event data.</param>
+        private void EmotionTablePopup_MouseDown(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+        {
+            EmotionTablePopup.HorizontalOffset += e.HorizontalChange;
+            EmotionTablePopup.VerticalOffset += e.VerticalChange;
+        }
+
+        /// <summary>
+        /// Handles the MouseDown event of the DebugWindowPopup control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
+        private void EmotionTablePopup_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            EmotionTableWindowsThumb.RaiseEvent(e);
+        }
+
+        private void EmotionButton_Click(object sender, RoutedEventArgs e)
+        {
+            sender = sender;
+        }
+
         #endregion
 
         #region Helper Methods and PRoperties
@@ -1091,5 +1125,7 @@
         }
 
         #endregion
+
+        
     }
 }
