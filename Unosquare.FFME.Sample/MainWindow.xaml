@@ -263,7 +263,7 @@
 
                     <Popup Name="EmotionTablePopup" MouseDown="EmotionTablePopup_MouseDown" IsOpen="{Binding IsChecked, ElementName=EmotionTableButton, Mode=TwoWay}" 
                            PopupAnimation="Fade" AllowsTransparency="True" PlacementTarget="{Binding ElementName=EmotionTableButton}" Placement="Right"
-                           VerticalOffset="-200" HorizontalOffset="40">
+                           VerticalOffset="-350" HorizontalOffset="40">
                         <Popup.Resources>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Foreground" Value="{StaticResource CustomSliderHighlightBrush}" />
@@ -276,11 +276,17 @@
                             <StackPanel Width="200">
                                 <Thumb x:Name="EmotionTableWindowsThumb" Background="Transparent" HorizontalAlignment="Left" Width="200"/>
                                 <TextBlock Text="Table tagged emotions" Padding="10,10,0,0" VerticalAlignment="Bottom" />
-                                <DataGrid x:Name="EmotionTable" Height="50" Margin="10,10,10,0" Background="#FF1F1F1F" ItemsSource="{Binding emotionTable}">
+                                <DataGrid x:Name="EmotionTable" Height="200" Margin="10,10,10,0" Background="#FF1F1F1F" AutoGenerateColumns="False">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Binding="{Binding Path=EmotionItem.emotion}" Foreground="Black" Width="60" Header="Emotion" IsReadOnly="false" />
-                                        <DataGridTextColumn Binding="{Binding}" Foreground="Black" Width="60" Header="Start" IsReadOnly="false" />
-                                        <DataGridTextColumn Binding="{Binding}" Foreground="Black" Width="60" Header="End" IsReadOnly="false" />
+                                        <DataGridTemplateColumn Header="Emotion" Width="60" IsReadOnly="True">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Rectangle Fill="{Binding emotionImage}" Width="30" Height="30" />
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Foreground="Black" Width="60" Header="Start" IsReadOnly="false" Binding="{Binding start}"/>
+                                        <DataGridTextColumn Foreground="Black" Width="60" Header="End" IsReadOnly="false" Binding="{Binding end}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
 

@@ -58,7 +58,8 @@
 
         #region Emotions Variables
 
-        private ObservableCollection<EmotionItem> emotionTable { get; set; }
+        private List<EmotionItem> emotionTable { get; set; }
+        private ResourceDictionary resourceDictionary;
 
         #endregion
 
@@ -315,10 +316,16 @@
         /// </summary>
         public MainWindow()
         {
+            // Initialize Tobii
             tobiiHost = new Host();
             gazePointDataStream = tobiiHost.Streams.CreateGazePointDataStream();
-            emotionTable = new ObservableCollection<EmotionItem>();
-            emotionTable.Add(new EmotionItem(Emotion.HAPPINESS, new TimeSpan(), new TimeSpan()));
+
+            resourceDictionary = new ResourceDictionary();
+            resourceDictionary.Source = new Uri("Icons.xaml", UriKind.Relative);
+
+            // Initialize Data for EmotionDataGrid
+            emotionTable = new List<EmotionItem>();
+            emotionTable.Add(new EmotionItem(Emotion.HAPPINESS, new TimeSpan(), new TimeSpan(), resourceDictionary));
 
             var screenBoundsState = tobiiHost.States.GetScreenBoundsAsync().Result;
             var screenBounds = screenBoundsState.IsValid
@@ -834,6 +841,8 @@
             }
 
             Loaded -= MainWindow_Loaded;
+
+            EmotionTable.ItemsSource = emotionTable;
         }
 
         /// <summary>
@@ -1126,6 +1135,9 @@
 
         #endregion
 
-        
+        private void SoundMenuButton_Checked()
+        {
+
+        }
     }
 }
