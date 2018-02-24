@@ -50,6 +50,7 @@
         private DelegateCommand m_OpenFileDialogCommand = null;
         private DelegateCommand m_TrackingSaveFileDialog = null;
         private DelegateCommand m_EmotionsSaveFileDialog = null;
+        private DelegateCommand m_SaveEmotionTableToFile = null;
 
         #endregion
 
@@ -286,6 +287,25 @@
                 }
 
                 return m_EmotionsSaveFileDialog;
+            }
+        }
+
+        public DelegateCommand SaveEmotionTableToFile
+        {
+            get
+            {
+                if (m_SaveEmotionTableToFile == null)
+                {
+                    m_SaveEmotionTableToFile = new DelegateCommand((o) => 
+                    {
+                        if (emotionTable.Count != 0 && !String.IsNullOrEmpty(UrlEmotionsFileTextBox.Text))
+                        {
+
+                        }
+                    }, null);
+                }
+
+                return m_SaveEmotionTableToFile;
             }
         }
 
