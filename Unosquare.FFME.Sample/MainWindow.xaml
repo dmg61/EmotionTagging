@@ -134,6 +134,46 @@
                         <Path Stretch="Uniform" Data="{Binding Source={StaticResource SettingIcon}, Path=Data}" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}" />
                     </ToggleButton>
 
+                    <Popup Name="SettingPopup" IsOpen="{Binding IsChecked, ElementName=SettingButton, Mode=TwoWay}" StaysOpen="False" 
+                           PopupAnimation="Fade" AllowsTransparency="True" Placement="Top" PlacementTarget="{Binding ElementName=SettingButton}"
+                           VerticalOffset="2" HorizontalOffset="-140">
+                        <Popup.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="{StaticResource CustomSliderHighlightBrush}" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="TextAlignment" Value="Left" />
+                            </Style>
+                        </Popup.Resources>
+                        <Border Background="#FF1F1F1F" BorderBrush="#FF767676" BorderThickness="1">
+                            <Grid Width="400">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <DockPanel Grid.Row="0" >
+                                    <TextBlock Text="Path to tracking file" Padding="10,0,0,0"  VerticalAlignment="Center" />
+                                    <ComboBox BorderThickness="0" x:Name="UrlTrackingFileTextBox" HorizontalAlignment="Center" Width="230" Margin="10" Padding="4" FontSize="15" IsEditable="True" StaysOpenOnEdit="True" />
+                                    <Button Style="{DynamicResource ModernButtonStyle}" HorizontalAlignment="Right" Command="{Binding ElementName=window, Path=TrackingSaveFileDialog}">
+                                        <Path Stretch="Uniform" Data="{Binding Source={StaticResource OpenFileIcon}, Path=Data}" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+                                    </Button>
+                                </DockPanel>
+                                <DockPanel Grid.Row="1">
+                                    <TextBlock Text="Path to emotions file" Padding="10,0,0,0"  VerticalAlignment="Center" />
+                                    <ComboBox BorderThickness="0" x:Name="UrlEmotionsFileTextBox" HorizontalAlignment="Center" Width="222" Margin="10" Padding="4" FontSize="15" IsEditable="True" StaysOpenOnEdit="True" />
+                                    <Button Style="{DynamicResource ModernButtonStyle}" HorizontalAlignment="Right" Command="{Binding ElementName=window, Path=EmoitonsSaveFileDialog}">
+                                        <Path Stretch="Uniform" Data="{Binding Source={StaticResource OpenFileIcon}, Path=Data}" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+                                    </Button>
+                                </DockPanel>
+                                <!--<DockPanel Grid.Row="2" HorizontalAlignment="Right">
+                                    <Button HorizontalAlignment="Right" Margin="0,0,10,10" Style="{DynamicResource ModernButtonStyle}" Command="{Binding ElementName=window, Path=OpenCommand}">
+                                        <Path Stretch="Uniform" Data="{Binding Source={StaticResource SaveFileIcon}, Path=Data}" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+                                    </Button>
+                                </DockPanel>-->
+                            </Grid>
+                        </Border>
+                    </Popup>
+
                     <ToggleButton Name="ModeButton" Style="{DynamicResource ModeToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}" >
                         <Path Stretch="Uniform" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}">
                             <Path.Style>
@@ -291,11 +331,8 @@
                                 </DataGrid>
 
                                 <DockPanel HorizontalAlignment="Right">
-                                    <Button HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="2" Grid.Column="0" Style="{DynamicResource ModernButtonStyle}" Command="{Binding OpenCommand, ElementName=window}">
-                                        <Path Stretch="Uniform" Data="{Binding Data, Source={StaticResource OpenIcon}}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
-                                    </Button>
                                     <Button HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="2" Grid.Column="1" Style="{DynamicResource ModernButtonStyle}" Command="{Binding OpenCommand, ElementName=window}">
-                                        <Path Stretch="Uniform" Data="{Binding Data, Source={StaticResource OpenIcon}}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+                                        <Path Stretch="Uniform" Data="{Binding Data, Source={StaticResource CloseIcon}}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
                                     </Button>
                                 </DockPanel>
                             </StackPanel>
@@ -340,9 +377,14 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="0" Text="Open File Path or URL" Padding="10,10,0,0" VerticalAlignment="Bottom" />
                                 <ComboBox Grid.Row="1" BorderThickness="0" x:Name="UrlTextBox" Margin="10" Padding="4" FontSize="15" IsEditable="True" StaysOpenOnEdit="True" />
-                                <Button HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="2" Style="{DynamicResource ModernButtonStyle}" Command="{Binding ElementName=window, Path=OpenCommand}">
-                                    <Path Stretch="Uniform" Data="{Binding Source={StaticResource OpenIcon}, Path=Data}" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
-                                </Button>
+                                <DockPanel Grid.Row="2" HorizontalAlignment="Right">
+                                    <Button HorizontalAlignment="Right" Margin="0,0,10,10" Style="{DynamicResource ModernButtonStyle}" Command="{Binding ElementName=window, Path=OpenFileDialogCommand}">
+                                        <Path Stretch="Uniform" Data="{Binding Source={StaticResource OpenFileIcon}, Path=Data}" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+                                    </Button>
+                                    <Button HorizontalAlignment="Right" Margin="0,0,10,10" Style="{DynamicResource ModernButtonStyle}" Command="{Binding ElementName=window, Path=OpenCommand}">
+                                        <Path Stretch="Uniform" Data="{Binding Source={StaticResource OpenIcon}, Path=Data}" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+                                    </Button>
+                                </DockPanel>
                             </Grid>
                         </Border>
                     </Popup>

@@ -2,6 +2,7 @@
 {
     using Config;
     using FFmpeg.AutoGen;
+    using Microsoft.Win32;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -46,6 +47,9 @@
         private DelegateCommand m_StopCommand = null;
         private DelegateCommand m_CloseCommand = null;
         private DelegateCommand m_ToggleFullscreenCommand = null;
+        private DelegateCommand m_OpenFileDialogCommand = null;
+        private DelegateCommand m_TrackingSaveFileDialog = null;
+        private DelegateCommand m_EmotionsSaveFileDialog = null;
 
         #endregion
 
@@ -196,6 +200,92 @@
                     }, null);
 
                 return m_ToggleFullscreenCommand;
+            }
+        }
+
+        public DelegateCommand OpenFileDialogCommand
+        {
+            get
+            {
+                if (m_OpenFileDialogCommand == null)
+                    m_OpenFileDialogCommand = new DelegateCommand((o) => 
+                    {
+                        OpenFileDialog openFileDialog = new OpenFileDialog();
+                        openFileDialog.Filter = "Video files (*.avi;*.mp4; *.mkv)|*.avi;*.mp4;*.mkv";
+
+                        if (openFileDialog.ShowDialog() == true)
+                        {
+                            UrlTextBox.Text = openFileDialog.FileName;
+                            OpenCommand.Execute();
+                        }
+                    }, null);
+
+                return m_OpenFileDialogCommand;
+            }
+        }
+
+        public DelegateCommand TrackingSaveFileDialog
+        {
+            get
+            {
+                if (m_TrackingSaveFileDialog == null)
+                {
+                    m_TrackingSaveFileDialog = new DelegateCommand((o) => 
+                    {
+                        SaveFileDialog saveFileDialog = new SaveFileDialog();
+                        saveFileDialog.Filter = "CSV file (*.csv)|*.csv";
+
+                        if (saveFileDialog.ShowDialog() == true)
+                        {
+                            if (UrlEmotionsFileTextBox.Text.Equals(saveFileDialog.FileName))
+                            {
+                                MessageBox.Show($"Emotions file should not be euqual to tracking file",
+                                    "MediaElement Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                                return;
+                            } else
+                            {
+                                UrlTrackingFileTextBox.Text = saveFileDialog.FileName;
+                            }
+                        }
+
+                        SettingPopup.IsOpen = true;
+                    }, null);
+                }
+
+                return m_TrackingSaveFileDialog;
+            }
+        }
+
+        public DelegateCommand EmoitonsSaveFileDialog
+        {
+            get
+            {
+                if (m_EmotionsSaveFileDialog == null)
+                {
+                    m_EmotionsSaveFileDialog = new DelegateCommand((o) =>
+                    {
+                        SaveFileDialog saveFileDialog = new SaveFileDialog();
+                        saveFileDialog.Filter = "CSV file (*.csv)|*.csv";
+
+                        if (saveFileDialog.ShowDialog() == true)
+                        {
+                            if (UrlTrackingFileTextBox.Text.Equals(saveFileDialog.FileName))
+                            {
+                                MessageBox.Show($"Emotions file should not be euqual to tracking file",
+                                    "MediaElement Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                                return;
+                            }
+                            else
+                            {
+                                UrlEmotionsFileTextBox.Text = saveFileDialog.FileName;
+                            }
+                        }
+
+                        SettingPopup.IsOpen = true;
+                    }, null);
+                }
+
+                return m_EmotionsSaveFileDialog;
             }
         }
 

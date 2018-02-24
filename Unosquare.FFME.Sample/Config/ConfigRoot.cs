@@ -22,7 +22,7 @@
         }
 
         public string Version { get; set; } = typeof(ConfigRoot).Assembly.GetName().Version.ToString();
-        public string FFmpegPath { get; set; } = @"c:\Users\Nastya\Downloads\ffmpeg-3.3.3-win32-shared\bin\";
+        public string FFmpegPath { get; set; } = @"/ffmpeg-3.3.3-win32-shared/bin";
         public List<string> HistoryEntries { get; set; } = new List<string>();
 
         public static ConfigRoot Load()
