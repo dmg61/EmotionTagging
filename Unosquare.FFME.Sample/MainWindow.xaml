@@ -174,7 +174,7 @@
                         </Border>
                     </Popup>
 
-                    <ToggleButton Name="ModeButton" Style="{DynamicResource ModeToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}" >
+                    <ToggleButton Name="ModeButton" Style="{DynamicResource ModeToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
                         <Path Stretch="Uniform" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}">
                             <Path.Style>
                                 <Style TargetType="Path">
@@ -216,6 +216,7 @@
                     <Popup Name="EmotionsPopup" MouseDown="EmotionsPopup_MouseDown" IsOpen="{Binding IsChecked, ElementName=EmotionsButton, Mode=TwoWay}" 
                            PopupAnimation="Fade" AllowsTransparency="True" PlacementTarget="{Binding ElementName=EmotionsButton}" Placement="Right"
                            VerticalOffset="-70" HorizontalOffset="-1180">
+                        
                         <Popup.Resources>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Foreground" Value="{StaticResource CustomSliderHighlightBrush}" />

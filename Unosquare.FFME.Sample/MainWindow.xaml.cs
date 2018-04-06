@@ -9,6 +9,7 @@
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
+    using System.IO;
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
@@ -17,6 +18,7 @@
     using System.Windows.Media;
     using System.Windows.Media.Animation;
     using System.Windows.Threading;
+    using System.Windows.Controls.Primitives;
     using Tobii.Interaction;
 
     /// <summary>
@@ -65,6 +67,8 @@
 
         private List<EmotionItem> emotionTable { get; set; }
         private ResourceDictionary resourceDictionary;
+        private StreamWriter trackingFileWriter;
+        private StreamWriter emotionFileWriter;
 
         #endregion
 
@@ -113,7 +117,7 @@
             get
             {
                 if (m_PauseCommand == null)
-                    m_PauseCommand = new DelegateCommand((o) => { Media.Pause(); gazePointDataStream.Next -= OnGazePointData; }, null);
+                    m_PauseCommand = new DelegateCommand((o) => { Media.Pause(); stopGazePointDataTracking(); }, null);
 
                 return m_PauseCommand;
             }
@@ -130,7 +134,7 @@
             get
             {
                 if (m_PlayCommand == null)
-                    m_PlayCommand = new DelegateCommand((o) => { Media.Play(); gazePointDataStream.Next += OnGazePointData; }, null);
+                    m_PlayCommand = new DelegateCommand((o) => { Media.Play(); startGazePointDataTracking(); }, null);
 
                 return m_PlayCommand;
             }
@@ -298,10 +302,24 @@
                 {
                     m_SaveEmotionTableToFile = new DelegateCommand((o) => 
                     {
-                        if (emotionTable.Count != 0 && !String.IsNullOrEmpty(UrlEmotionsFileTextBox.Text))
-                        {
+                        SaveFileDialog saveFileDialog = new SaveFileDialog();
+                        saveFileDialog.Filter = "CSV file (*.csv)|*.csv";
 
+                        if (saveFileDialog.ShowDialog() == true)
+                        {
+                            if (UrlEmotionsFileTextBox.Text.Equals(saveFileDialog.FileName))
+                            {
+                                MessageBox.Show($"Emotions file should not be euqual to emotions file",
+                                    "MediaElement Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                                return;
+                            }
+                            else
+                            {
+                                UrlTrackingFileTextBox.Text = saveFileDialog.FileName;
+                            }
                         }
+
+                        SettingPopup.IsOpen = true;
                     }, null);
                 }
 
@@ -1150,7 +1168,28 @@
 
         private void EmotionButton_Click(object sender, RoutedEventArgs e)
         {
-            sender = sender;
+            ToggleButton activeButton = sender as ToggleButton;
+            ToggleButton lastActiveButton = null;
+
+            // Detect last active button
+            if (AngerButton.IsChecked == true && AngerButton != activeButton)
+                lastActiveButton = AngerButton;
+            if (ContemptButton.IsChecked == true && ContemptButton!= activeButton)
+                lastActiveButton = ContemptButton;
+            if (DisgustButton.IsChecked == true && DisgustButton != activeButton)
+                lastActiveButton = DisgustButton;
+            if (FearButton.IsChecked == true && FearButton != activeButton)
+                lastActiveButton = FearButton;
+            if (HappinessButton.IsChecked == true && HappinessButton != activeButton)
+                lastActiveButton = HappinessButton;
+            if (SadnessButton.IsChecked == true && SadnessButton != activeButton)
+                lastActiveButton = SadnessButton;
+            if (SurpriseButton.IsChecked == true && SurpriseButton != activeButton)
+                lastActiveButton = SurpriseButton;
+
+            // TODO: Add to Table info about cancle last active emotion
+            if (lastActiveButton != null)
+                lastActiveButton.IsChecked = false;
         }
 
         #endregion
@@ -1222,7 +1261,8 @@
 
         private void OnGazePointData(object sender, StreamData<GazePointData> streamData)
         {
-            Console.WriteLine("Timestamp: {0}\t X:{1} Y:{2}", Media.VideoSmtpeTimecode, streamData.Data.X, streamData.Data.Y);
+            if (trackingFileWriter.BaseStream != null)
+                trackingFileWriter.WriteLine(String.Format("{0};{1};{2}", Media.VideoSmtpeTimecode, streamData.Data.X, streamData.Data.Y));
         }
 
         private void OnLostGaze()
@@ -1230,7 +1270,7 @@
             if (Media != null && Media.IsPlaying)
             {
                 PauseCommand.Execute();
-                gazePointDataStream.Next -= OnGazePointData;
+                stopGazePointDataTracking();
             }
         }
 
@@ -1239,9 +1279,38 @@
             if (Media != null && !Media.IsPlaying)
             {
                 PlayCommand.Execute();
-                gazePointDataStream.Next += OnGazePointData;
+                startGazePointDataTracking();
             }
         }
+
+        private void startGazePointDataTracking()
+        {
+            if (ModeButton.IsChecked == true)
+            {
+                trackingFileWriter = new StreamWriter(UrlTrackingFileTextBox.Text);
+            }
+
+            gazePointDataStream.Next += OnGazePointData;
+
+            ModeButton.IsEnabled    = false;
+            SettingButton.IsEnabled = false;
+        }
+
+        private void stopGazePointDataTracking()
+        {
+            if (trackingFileWriter.BaseStream != null)
+            {
+                trackingFileWriter.Flush();
+                trackingFileWriter.Close();
+            }
+            
+            gazePointDataStream.Next -= OnGazePointData;
+
+            ModeButton.IsEnabled    = true;
+            SettingButton.IsEnabled = true;
+        }
+
+
 
         #endregion
 
