@@ -16,6 +16,7 @@
                     <local:TimeSpanFormatter x:Key="TimeSpanFormatter" />
                     <local:PercentageFormatter x:Key="PercentageFormatter" />
                     <local:BooleanToVisibilityMultiConverter x:Key="BooleanToVisibilityMultiConverter" />
+                    <local:BooleanMultiConverter x:Key="BooleanMultiConverter" />
                 </ResourceDictionary>
                 <ResourceDictionary Source="Icons.xaml" />
                 <ResourceDictionary Source="Styles.xaml" />
@@ -174,7 +175,7 @@
                         </Border>
                     </Popup>
 
-                    <ToggleButton Name="ModeButton" Style="{DynamicResource ModeToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
+                    <ToggleButton Name="ModeButton" Style="{DynamicResource ModeToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}" Click="ModeButton_Click">
                         <Path Stretch="Uniform" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}">
                             <Path.Style>
                                 <Style TargetType="Path">
@@ -216,7 +217,6 @@
                     <Popup Name="EmotionsPopup" MouseDown="EmotionsPopup_MouseDown" IsOpen="{Binding IsChecked, ElementName=EmotionsButton, Mode=TwoWay}" 
                            PopupAnimation="Fade" AllowsTransparency="True" PlacementTarget="{Binding ElementName=EmotionsButton}" Placement="Right"
                            VerticalOffset="-70" HorizontalOffset="-1180">
-                        
                         <Popup.Resources>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Foreground" Value="{StaticResource CustomSliderHighlightBrush}" />
@@ -225,8 +225,8 @@
                             </Style>
                         </Popup.Resources>
 
-                        <Border Background="#FF1F1F1F" BorderBrush="#FF767676" BorderThickness="1" Margin="0">
-                            <DockPanel Name="EmotionControl" HorizontalAlignment="Center" Width="425" Margin="0" >
+                        <Border x:Name="EmotionsBorder" Background="#FF1F1F1F" BorderBrush="#FF767676" BorderThickness="1" Margin="0">
+                            <DockPanel Name="EmotionControl" HorizontalAlignment="Center" Width="425" Margin="0">
                                 <ToggleButton Name="AngerButton" Click="EmotionButton_Click" Style="{DynamicResource EmotionToggleButtonStyle}" Visibility="{Binding ElementName=window, Path=OpenButtonVisibility}">
                                     <Grid>
                                         <Grid.RowDefinitions>
@@ -304,7 +304,7 @@
 
                     <Popup Name="EmotionTablePopup" MouseDown="EmotionTablePopup_MouseDown" IsOpen="{Binding IsChecked, ElementName=EmotionTableButton, Mode=TwoWay}" 
                            PopupAnimation="Fade" AllowsTransparency="True" PlacementTarget="{Binding ElementName=EmotionTableButton}" Placement="Right"
-                           VerticalOffset="-350" HorizontalOffset="40">
+                           VerticalOffset="-350" HorizontalOffset="-35">
                         <Popup.Resources>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Foreground" Value="{StaticResource CustomSliderHighlightBrush}" />
@@ -313,11 +313,11 @@
                             </Style>
                         </Popup.Resources>
 
-                        <Border Background="#FF1F1F1F" BorderBrush="#FF767676" BorderThickness="1" Margin="0">
-                            <StackPanel Width="200">
-                                <Thumb x:Name="EmotionTableWindowsThumb" Background="Transparent" HorizontalAlignment="Left" Width="200"/>
+                        <Border x:Name="EmotionTableBorder" Background="#FF1F1F1F" BorderBrush="#FF767676" BorderThickness="1" Margin="0">
+                            <StackPanel Width="265">
+                                <Thumb x:Name="EmotionTableWindowsThumb" DragDelta="EmotionTableThums_DragDelta" Background="Transparent" HorizontalAlignment="Left" Width="265" Height="5"/>
                                 <TextBlock Text="Table tagged emotions" Padding="10,10,0,0" VerticalAlignment="Bottom" />
-                                <DataGrid x:Name="EmotionTable" Height="200" Margin="10,10,10,0" Background="#FF1F1F1F" AutoGenerateColumns="False">
+                                <DataGrid x:Name="EmotionTable" Height="200" Margin="10,10,10,0" Background="#FF1F1F1F" AutoGenerateColumns="False" SelectionMode="Single">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Header="Emotion" Width="60" IsReadOnly="True">
                                             <DataGridTemplateColumn.CellTemplate>
@@ -326,14 +326,17 @@
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
-                                        <DataGridTextColumn Foreground="Black" Width="60" Header="Start" IsReadOnly="false" Binding="{Binding start}"/>
-                                        <DataGridTextColumn Foreground="Black" Width="60" Header="End" IsReadOnly="false" Binding="{Binding end}"/>
+                                        <DataGridTextColumn Foreground="Black" Width="80" Header="Start" IsReadOnly="true" Binding="{Binding start, StringFormat=hh\\:mm\\:ss\\.ff}"/>
+                                        <DataGridTextColumn Foreground="Black" Width="80" Header="End" IsReadOnly="true" Binding="{Binding end, StringFormat=hh\\:mm\\:ss\\.ff}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
 
                                 <DockPanel HorizontalAlignment="Right">
-                                    <Button HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="2" Grid.Column="1" Style="{DynamicResource ModernButtonStyle}" Command="{Binding OpenCommand, ElementName=window}">
+                                    <Button x:Name="RemoveEmotionItemButton" HorizontalAlignment="Right" Margin="0,0,10,10" Style="{DynamicResource ModernButtonStyle}" Click="RemoveEmotionItemButton_Click">
                                         <Path Stretch="Uniform" Data="{Binding Data, Source={StaticResource CloseIcon}}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+                                    </Button>
+                                    <Button x:Name="SaveEmotionTableButton" HorizontalAlignment="Right" Margin="0,0,10,10" Style="{DynamicResource ModernButtonStyle}" Click="SaveEmotionTableButton_Click">
+                                        <Path Stretch="Uniform" Data="{Binding Data, Source={StaticResource SaveFileIcon}}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
                                     </Button>
                                 </DockPanel>
                             </StackPanel>
@@ -590,6 +593,34 @@
                     </DockPanel>
 
                 </StackPanel>
+            </Border>
+        </Popup>
+
+
+        <Popup Name="InfoWindowPopup" AllowsTransparency="True"
+               PlacementTarget="{Binding ElementName=window}" Placement="Center" HorizontalOffset="-10" VerticalOffset="-20">
+            <Popup.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="{StaticResource CustomSliderHighlightBrush}" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="TextAlignment" Value="Left" />
+                    <Setter Property="FontSize" Value="17"/>
+                </Style>
+            </Popup.Resources>
+            <Border BorderBrush="#FF767676" BorderThickness="1" Background="#ee1f1f1f">
+                <Grid Width="500">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0" HorizontalAlignment="Stretch">
+                        <TextBlock Text="Information" Padding="10,0,0,0" VerticalAlignment="Center" />
+                        <Button x:Name="CloseInformationWindowsButton" HorizontalAlignment="Right" Style="{DynamicResource ModernButtonStyle}" Click="CloseInformationWindowsButton_Click">
+                            <Path Stretch="Uniform" Data="{Binding Source={StaticResource CloseIcon}, Path=Data}" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+                        </Button>
+                    </DockPanel>
+                    <TextBlock x:Name="InformationWindowText" Grid.Row="1" Padding="10,10,0,0" VerticalAlignment="Center" TextBlock.FontSize="20" TextBlock.Foreground="{StaticResource CustomSliderHighlightBrush}" TextBlock.TextAlignment="Center" HorizontalAlignment="Center" Background="#ee1f1f1f" />
+                </Grid>
             </Border>
         </Popup>
     </Grid>

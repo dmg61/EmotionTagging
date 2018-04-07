@@ -20,6 +20,7 @@
     using System.Windows.Threading;
     using System.Windows.Controls.Primitives;
     using Tobii.Interaction;
+    using System.Windows.Documents;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -93,12 +94,15 @@
                             var target = new Uri(UrlTextBox.Text);
                             Media.Source = target;
 
-                            gazePointDataStream.Next += OnGazePointData;
+                            StartGazePointDataTracking();
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show($"Media Failed: {ex.GetType()}\r\n{ex.Message}",
-                                "MediaElement Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                            Media.Close();
+                            StopGazePointDataTracking();
+
+                            MessageBox.Show(ex.Message,
+                                "Media Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
                         }
                     }, null);
 
@@ -117,7 +121,7 @@
             get
             {
                 if (m_PauseCommand == null)
-                    m_PauseCommand = new DelegateCommand((o) => { Media.Pause(); stopGazePointDataTracking(); }, null);
+                    m_PauseCommand = new DelegateCommand((o) => { Media.Pause(); StopGazePointDataTracking(); }, null);
 
                 return m_PauseCommand;
             }
@@ -134,7 +138,23 @@
             get
             {
                 if (m_PlayCommand == null)
-                    m_PlayCommand = new DelegateCommand((o) => { Media.Play(); startGazePointDataTracking(); }, null);
+                    m_PlayCommand = new DelegateCommand((o) => 
+                    {
+                        Media.Play();
+
+                        try
+                        { 
+                            StartGazePointDataTracking();
+                        }
+                        catch (Exception ex)
+                        {
+                            Media.Close();
+                            StopGazePointDataTracking();
+
+                            MessageBox.Show(ex.Message,
+                                "Media Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                        }
+                    }, null);
 
                 return m_PlayCommand;
             }
@@ -151,7 +171,7 @@
             get
             {
                 if (m_StopCommand == null)
-                    m_StopCommand = new DelegateCommand((o) => { Media.Stop(); gazePointDataStream.Next -= OnGazePointData; }, null);
+                    m_StopCommand = new DelegateCommand((o) => { Media.Stop(); StopGazePointDataTracking(); }, null);
 
                 return m_StopCommand;
             }
@@ -168,7 +188,7 @@
             get
             {
                 if (m_CloseCommand == null)
-                    m_CloseCommand = new DelegateCommand((o) => { Media.Close(); gazePointDataStream.Next -= OnGazePointData; }, null);
+                    m_CloseCommand = new DelegateCommand((o) => { Media.Close(); StopGazePointDataTracking(); }, null);
 
                 return m_CloseCommand;
             }
@@ -213,7 +233,7 @@
             get
             {
                 if (m_OpenFileDialogCommand == null)
-                    m_OpenFileDialogCommand = new DelegateCommand((o) => 
+                    m_OpenFileDialogCommand = new DelegateCommand((o) =>
                     {
                         OpenFileDialog openFileDialog = new OpenFileDialog();
                         openFileDialog.Filter = "Video files (*.avi;*.mp4; *.mkv)|*.avi;*.mp4;*.mkv";
@@ -235,7 +255,7 @@
             {
                 if (m_TrackingSaveFileDialog == null)
                 {
-                    m_TrackingSaveFileDialog = new DelegateCommand((o) => 
+                    m_TrackingSaveFileDialog = new DelegateCommand((o) =>
                     {
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
                         saveFileDialog.Filter = "CSV file (*.csv)|*.csv";
@@ -245,9 +265,10 @@
                             if (UrlEmotionsFileTextBox.Text.Equals(saveFileDialog.FileName))
                             {
                                 MessageBox.Show($"Emotions file should not be euqual to tracking file",
-                                    "MediaElement Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                                    "Media Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
                                 return;
-                            } else
+                            }
+                            else
                             {
                                 UrlTrackingFileTextBox.Text = saveFileDialog.FileName;
                             }
@@ -277,7 +298,7 @@
                             if (UrlTrackingFileTextBox.Text.Equals(saveFileDialog.FileName))
                             {
                                 MessageBox.Show($"Emotions file should not be euqual to tracking file",
-                                    "MediaElement Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                                    "Media Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
                                 return;
                             }
                             else
@@ -300,7 +321,7 @@
             {
                 if (m_SaveEmotionTableToFile == null)
                 {
-                    m_SaveEmotionTableToFile = new DelegateCommand((o) => 
+                    m_SaveEmotionTableToFile = new DelegateCommand((o) =>
                     {
                         SaveFileDialog saveFileDialog = new SaveFileDialog();
                         saveFileDialog.Filter = "CSV file (*.csv)|*.csv";
@@ -310,7 +331,7 @@
                             if (UrlEmotionsFileTextBox.Text.Equals(saveFileDialog.FileName))
                             {
                                 MessageBox.Show($"Emotions file should not be euqual to emotions file",
-                                    "MediaElement Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                                    "Media Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
                                 return;
                             }
                             else
@@ -453,7 +474,6 @@
 
             // Initialize Data for EmotionDataGrid
             emotionTable = new List<EmotionItem>();
-            emotionTable.Add(new EmotionItem(Emotion.HAPPINESS, new TimeSpan(), new TimeSpan(), resourceDictionary));
 
             var screenBoundsState = tobiiHost.States.GetScreenBoundsAsync().Result;
             var screenBounds = screenBoundsState.IsValid
@@ -1024,7 +1044,7 @@
         private void Media_MediaFailed(object sender, ExceptionRoutedEventArgs e)
         {
             MessageBox.Show($"Media Failed: {e.ErrorException.GetType()}\r\n{e.ErrorException.Message}",
-                "MediaElement Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+                "Media Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
         }
 
         /// <summary>
@@ -1150,7 +1170,7 @@
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Windows.Controls.Primitives.DragDeltaEventArgs"/> instance containing the event data.</param>
-        private void EmotionTablePopup_MouseDown(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
+        private void EmotionTableThums_DragDelta(object sender, System.Windows.Controls.Primitives.DragDeltaEventArgs e)
         {
             EmotionTablePopup.HorizontalOffset += e.HorizontalChange;
             EmotionTablePopup.VerticalOffset += e.VerticalChange;
@@ -1170,11 +1190,33 @@
         {
             ToggleButton activeButton = sender as ToggleButton;
             ToggleButton lastActiveButton = null;
+            Emotion activeEmotion = Emotion.HAPPINESS;
+            TimeSpan currentVideoTimespan = TimeSpan.Zero;
+
+            if (Media.IsOpen)
+                currentVideoTimespan = TimeSpan.ParseExact(Media.VideoSmtpeTimecode, "hh\\:mm\\:ss\\:ff", CultureInfo.InvariantCulture);
+            else
+                return;
+
+            if (AngerButton == activeButton)
+                activeEmotion = Emotion.ANGER;
+            if (ContemptButton == activeButton)
+                activeEmotion = Emotion.CONTEMPT;
+            if (DisgustButton == activeButton)
+                activeEmotion = Emotion.DISGUST;
+            if (FearButton == activeButton)
+                activeEmotion = Emotion.FEAR;
+            if (HappinessButton == activeButton)
+                activeEmotion = Emotion.HAPPINESS;
+            if (SadnessButton == activeButton)
+                activeEmotion = Emotion.SADNESS;
+            if (SurpriseButton == activeButton)
+                activeEmotion = Emotion.SURPRISE;
 
             // Detect last active button
             if (AngerButton.IsChecked == true && AngerButton != activeButton)
                 lastActiveButton = AngerButton;
-            if (ContemptButton.IsChecked == true && ContemptButton!= activeButton)
+            if (ContemptButton.IsChecked == true && ContemptButton != activeButton)
                 lastActiveButton = ContemptButton;
             if (DisgustButton.IsChecked == true && DisgustButton != activeButton)
                 lastActiveButton = DisgustButton;
@@ -1187,9 +1229,110 @@
             if (SurpriseButton.IsChecked == true && SurpriseButton != activeButton)
                 lastActiveButton = SurpriseButton;
 
-            // TODO: Add to Table info about cancle last active emotion
+            // Disable last active emotion button
             if (lastActiveButton != null)
                 lastActiveButton.IsChecked = false;
+
+            // Add new emotion in emotionTable
+            if (activeButton.IsChecked == true)
+            {
+                int insertIndex = -1;
+
+                try
+                {
+                    insertIndex = getInserIndexInEmotionTable(currentVideoTimespan);
+                }
+                catch (InvalidDataException exception)
+                {
+                    MessageBox.Show($"{exception.Message}",
+                               "Media Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+
+                    activeButton.IsChecked = false;
+                    if (lastActiveButton != null) lastActiveButton.IsChecked = true;
+                    return;
+                }
+
+                if (insertIndex < emotionTable.Count && emotionTable[insertIndex].end.Equals(TimeSpan.Zero))
+                    emotionTable[insertIndex].end = currentVideoTimespan;
+
+                emotionTable.Insert(insertIndex, new EmotionItem(activeEmotion, currentVideoTimespan, TimeSpan.Zero, resourceDictionary));
+            }
+            else
+            {
+                // Find element with "end" zero and set current video timespan
+                emotionTable.Find(i => i.end.Equals(TimeSpan.Zero)).end = currentVideoTimespan;
+            }
+
+            EmotionTable.Items.Refresh();
+        }
+
+        private int getInserIndexInEmotionTable(TimeSpan start)
+        {
+            int index = emotionTable.Count;
+
+            for (int i = 0; i < emotionTable.Count; i++)
+            {
+                if (emotionTable[i].start.Equals(start))
+                    throw new InvalidDataException("The inserted value can not be equal\r\nto the start value of other elements");
+                if (start > emotionTable[i].start && start < emotionTable[i].end)
+                    throw new InvalidDataException("The inserted value can not be inside\r\nthe range of other elements");
+
+                if (emotionTable[i].start < start)
+                {
+                    index = i;
+                    break;
+                }
+            }
+
+            return index;
+        }
+
+        private void ModeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ModeButton.IsChecked == false)
+            {
+                EmotionsButton.IsChecked = false;
+                EmotionTableButton.IsChecked = false;
+            }
+        }
+
+        private void RemoveEmotionItemButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (EmotionTable.SelectedIndex != -1)
+            {
+                emotionTable.Remove(EmotionTable.SelectedItem as EmotionItem);
+                EmotionTable.Items.Refresh();
+            }
+        }
+
+        private void CloseInformationWindowsButton_Click(object sender, RoutedEventArgs e)
+        {
+            InfoWindowPopup.IsOpen = false;
+            Player.IsEnabled = true;
+            EmotionsBorder.IsEnabled = true;
+            EmotionTableBorder.IsEnabled = true;
+        }
+
+        private void SaveEmotionTableButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(UrlEmotionsFileTextBox.Text))
+            {
+                MessageBox.Show($"File for save emotion tagging data not found",
+                               "Media Error", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+
+                return;
+            }
+
+            emotionFileWriter = new StreamWriter(UrlEmotionsFileTextBox.Text);
+
+            foreach (EmotionItem item in emotionTable)
+                emotionFileWriter.WriteLine(String.Format("{0};{1};{2}", item.getEmotionName(), item.start, item.end));
+
+            emotionFileWriter.Flush();
+            emotionFileWriter.Close();
+
+            MessageBox.Show($"Success save tagging data to file:\r\n{UrlEmotionsFileTextBox.Text}",
+                               "Media", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
         }
 
         #endregion
@@ -1270,7 +1413,7 @@
             if (Media != null && Media.IsPlaying)
             {
                 PauseCommand.Execute();
-                stopGazePointDataTracking();
+                StopGazePointDataTracking();
             }
         }
 
@@ -1279,44 +1422,42 @@
             if (Media != null && !Media.IsPlaying)
             {
                 PlayCommand.Execute();
-                startGazePointDataTracking();
+                StartGazePointDataTracking();
             }
         }
 
-        private void startGazePointDataTracking()
+        private void StartGazePointDataTracking()
         {
-            if (ModeButton.IsChecked == true)
+            if (ModeButton.IsChecked == false)
             {
+                if (String.IsNullOrEmpty(UrlTrackingFileTextBox.Text))
+                    throw new ArgumentException("File for save eye tracking data not found");
+
                 trackingFileWriter = new StreamWriter(UrlTrackingFileTextBox.Text);
+
+                gazePointDataStream.Next += OnGazePointData;
             }
 
-            gazePointDataStream.Next += OnGazePointData;
-
-            ModeButton.IsEnabled    = false;
+            ModeButton.IsEnabled = false;
             SettingButton.IsEnabled = false;
         }
 
-        private void stopGazePointDataTracking()
+        private void StopGazePointDataTracking()
         {
-            if (trackingFileWriter.BaseStream != null)
+            if (ModeButton.IsChecked == false 
+                && trackingFileWriter != null 
+                && trackingFileWriter.BaseStream != null)
             {
                 trackingFileWriter.Flush();
                 trackingFileWriter.Close();
-            }
-            
-            gazePointDataStream.Next -= OnGazePointData;
 
-            ModeButton.IsEnabled    = true;
+                gazePointDataStream.Next -= OnGazePointData;
+            }
+
+            ModeButton.IsEnabled = true;
             SettingButton.IsEnabled = true;
         }
 
-
-
         #endregion
-
-        private void SoundMenuButton_Checked()
-        {
-
-        }
     }
 }

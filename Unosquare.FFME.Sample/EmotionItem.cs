@@ -11,11 +11,12 @@ namespace Unosquare.FFME.Sample
 {
     class EmotionItem
     {
+        private Emotion _emotion;
         public Emotion emotion
         {
             get
             {
-                return emotion;
+                return _emotion;
             }
             set
             {
@@ -44,7 +45,7 @@ namespace Unosquare.FFME.Sample
                         break;
                 }
 
-                //this.emotion = value;
+                _emotion = value;
             }
         }
 
@@ -73,7 +74,7 @@ namespace Unosquare.FFME.Sample
 
         public String getEmotionName()
         {
-            return emotion.ToString();
+            return _emotion.ToString();
         }
     }
 

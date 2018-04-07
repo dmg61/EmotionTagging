@@ -92,6 +92,7 @@
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="ConsoleManager.cs" />
     <Compile Include="EmotionItem.cs" />
+    <Compile Include="GridTimeSpanFormatter.cs" />
     <Compile Include="ValueConverters.cs" />
     <Compile Include="WindowStatus.cs" />
     <Page Include="Icons.xaml">
