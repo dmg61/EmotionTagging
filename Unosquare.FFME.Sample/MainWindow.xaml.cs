@@ -173,7 +173,7 @@
             get
             {
                 if (m_StopCommand == null)
-                    m_StopCommand = new DelegateCommand((o) => { Media.Stop(); StopGazePointDataTracking(); }, null);
+                    m_StopCommand = new DelegateCommand((o) => { Media.Stop(); StopGazePointDataTracking(true); }, null);
 
                 return m_StopCommand;
             }
@@ -1419,7 +1419,7 @@
 
         private void OnGazePointData(object sender, StreamData<GazePointData> streamData)
         {
-            if (trackingFileWriter.BaseStream != null)
+            if (trackingFileWriter.BaseStream != null && Media.IsPlaying)
                 trackingFileWriter.WriteLine(String.Format("{0};{1};{2}", Media.VideoSmtpeTimecode, streamData.Data.X, streamData.Data.Y));
         }
 
@@ -1434,37 +1434,47 @@
 
         private void OnHasGaze()
         {
-            if (Media != null && !Media.IsPlaying)
+            if (Media != null 
+                && !Media.IsPlaying)
             {
-                PlayCommand.Execute();
+                if (!Media.VideoSmtpeTimecode.StartsWith("00:00:00"))
+                    PlayCommand.Execute();
+
                 StartGazePointDataTracking(true);
             }
         }
 
         private void StartGazePointDataTracking(bool appendDataToExistFile = false)
         {
-            if (ModeButton.IsChecked == false)
+            if (Media.IsPlaying)
             {
-                if (String.IsNullOrEmpty(UrlTrackingFileTextBox.Text))
-                    throw new ArgumentException("File for save eye tracking data not found");
+                if (ModeButton.IsChecked == false)
+                {
+                    if (String.IsNullOrEmpty(UrlTrackingFileTextBox.Text))
+                        throw new ArgumentException("File for save eye tracking data not found");
 
-                trackingFileWriter = new StreamWriter(UrlTrackingFileTextBox.Text, appendDataToExistFile);
+                    if (trackingFileWriter == null || trackingFileWriter.BaseStream == null)
+                        trackingFileWriter = new StreamWriter(UrlTrackingFileTextBox.Text, appendDataToExistFile);
 
-                gazePointDataStream.Next += OnGazePointData;
+                    gazePointDataStream.Next += OnGazePointData;
+                }
+
+                ModeButton.IsEnabled = false;
+                SettingButton.IsEnabled = false;
             }
-
-            ModeButton.IsEnabled = false;
-            SettingButton.IsEnabled = false;
         }
 
-        private void StopGazePointDataTracking()
+        private void StopGazePointDataTracking(bool stopWriteFile = false)
         {
             if (ModeButton.IsChecked == false 
                 && trackingFileWriter != null 
                 && trackingFileWriter.BaseStream != null)
             {
-                trackingFileWriter.Flush();
-                trackingFileWriter.Close();
+                if (stopWriteFile)
+                {
+                    trackingFileWriter.Flush();
+                    trackingFileWriter.Close();
+                }
 
                 gazePointDataStream.Next -= OnGazePointData;
             }
