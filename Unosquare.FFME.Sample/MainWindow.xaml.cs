@@ -140,11 +140,13 @@
                 if (m_PlayCommand == null)
                     m_PlayCommand = new DelegateCommand((o) => 
                     {
+                        bool append = !Media.VideoSmtpeTimecode.Equals("00:00:00:00");
+
                         Media.Play();
 
                         try
                         { 
-                            StartGazePointDataTracking();
+                            StartGazePointDataTracking(append);
                         }
                         catch (Exception ex)
                         {
@@ -1252,8 +1254,8 @@
                     return;
                 }
 
-                if (insertIndex < emotionTable.Count && emotionTable[insertIndex].end.Equals(TimeSpan.Zero))
-                    emotionTable[insertIndex].end = currentVideoTimespan;
+                if (lastActiveButton != null)
+                    emotionTable.Find(i => i.end.Equals(TimeSpan.Zero)).end = currentVideoTimespan;
 
                 emotionTable.Insert(insertIndex, new EmotionItem(activeEmotion, currentVideoTimespan, TimeSpan.Zero, resourceDictionary));
             }
@@ -1277,7 +1279,7 @@
                 if (start > emotionTable[i].start && start < emotionTable[i].end)
                     throw new InvalidDataException("The inserted value can not be inside\r\nthe range of other elements");
 
-                if (emotionTable[i].start < start)
+                if (emotionTable[i].start > start)
                 {
                     index = i;
                     break;
@@ -1293,6 +1295,19 @@
             {
                 EmotionsButton.IsChecked = false;
                 EmotionTableButton.IsChecked = false;
+            }
+        }
+
+        private void RemoveEmotionItemButton_DoubleClick(object sender, RoutedEventArgs e)
+        {
+ 
+            MessageBoxResult messageBoxgResult = MessageBox.Show($"Do you want clear emotion tagging table?",
+                            "Media", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.No, MessageBoxOptions.DefaultDesktopOnly);
+
+            if (messageBoxgResult == MessageBoxResult.Yes)
+            {
+                emotionTable.Clear();
+                EmotionTable.Items.Refresh();
             }
         }
 
@@ -1422,18 +1437,18 @@
             if (Media != null && !Media.IsPlaying)
             {
                 PlayCommand.Execute();
-                StartGazePointDataTracking();
+                StartGazePointDataTracking(true);
             }
         }
 
-        private void StartGazePointDataTracking()
+        private void StartGazePointDataTracking(bool appendDataToExistFile = false)
         {
             if (ModeButton.IsChecked == false)
             {
                 if (String.IsNullOrEmpty(UrlTrackingFileTextBox.Text))
                     throw new ArgumentException("File for save eye tracking data not found");
 
-                trackingFileWriter = new StreamWriter(UrlTrackingFileTextBox.Text);
+                trackingFileWriter = new StreamWriter(UrlTrackingFileTextBox.Text, appendDataToExistFile);
 
                 gazePointDataStream.Next += OnGazePointData;
             }

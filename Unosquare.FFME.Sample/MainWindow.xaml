@@ -332,8 +332,8 @@
                                 </DataGrid>
 
                                 <DockPanel HorizontalAlignment="Right">
-                                    <Button x:Name="RemoveEmotionItemButton" HorizontalAlignment="Right" Margin="0,0,10,10" Style="{DynamicResource ModernButtonStyle}" Click="RemoveEmotionItemButton_Click">
-                                        <Path Stretch="Uniform" Data="{Binding Data, Source={StaticResource CloseIcon}}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
+                                    <Button x:Name="RemoveEmotionItemButton" HorizontalAlignment="Right" Margin="0,0,10,10" Style="{DynamicResource ModernButtonStyle}" MouseDoubleClick="RemoveEmotionItemButton_DoubleClick" Click="RemoveEmotionItemButton_Click">
+                                        <Path Stretch="Uniform" Data="{Binding Data, Source={StaticResource CloseIcon}}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"/>
                                     </Button>
                                     <Button x:Name="SaveEmotionTableButton" HorizontalAlignment="Right" Margin="0,0,10,10" Style="{DynamicResource ModernButtonStyle}" Click="SaveEmotionTableButton_Click">
                                         <Path Stretch="Uniform" Data="{Binding Data, Source={StaticResource SaveFileIcon}}" Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
