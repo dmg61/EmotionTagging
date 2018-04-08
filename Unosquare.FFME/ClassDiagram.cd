@@ -1,0 +1,645 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Unosquare.FFME.Commands.CloseCommand" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\CloseCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Commands.MediaCommand" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAaAAAAgAAAAAAAABAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Commands\MediaCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Commands.MediaCommandManager" Collapsed="true">
+    <Position X="25.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAgAAAEQAIAAAKAAAAAAABBCAAAIAoAAAAACAwAA=</HashCode>
+      <FileName>Commands\MediaCommandManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Commands.OpenCommand" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAgAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\OpenCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Commands.PauseCommand" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\PauseCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Commands.PlayCommand" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\PlayCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Commands.SeekCommand" Collapsed="true">
+    <Position X="9.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAQAAAAAAAAAIA=</HashCode>
+      <FileName>Commands\SeekCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Commands.SpeedRatioCommand" Collapsed="true">
+    <Position X="12" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Commands\SpeedRatioCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Commands.StopCommand" Collapsed="true">
+    <Position X="14.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\StopCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Core.AtomicBoolean" Collapsed="true">
+    <Position X="16.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Core\AtomicBoolean.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Core.AtomicDouble" Collapsed="true">
+    <Position X="18.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Core\AtomicDouble.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Core.AtomicLong" Collapsed="true">
+    <Position X="20.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Core\AtomicLong.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Core.AudioParams" Collapsed="true">
+    <Position X="22" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BACCAAAQAAAAAIAAAAAIAAAAgEgAAAAgAQAAAAQAAAA=</HashCode>
+      <FileName>Core\AudioParams.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Core.CircularBuffer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AKAAAAAAACAAAAAACAABABBgAFAIAAAAgAAQAAFAUAA=</HashCode>
+      <FileName>Core\CircularBuffer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Unosquare.FFME.Core.Clock" Collapsed="true">
+    <Position X="16.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEgAAAAAAAABAAgCAAAQAAAABAAAAAAgAQAAQAAAAA=</HashCode>
+      <FileName>Core\Clock.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Core.CodecOption" Collapsed="true">
+    <Position X="22" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAEAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Core\CodecOption.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Core.Constants" Collapsed="true">
+    <Position X="23.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAEAAgAAwAEACJAAEAIAEEAAAAACCBEAAJQACIAAig=</HashCode>
+      <FileName>Core\Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Core.FFDictionary" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AhAAAAIAICAABQBACAAABBQAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\FFDictionary.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Unosquare.FFME.Core.FFDictionaryEntry" Collapsed="true">
+    <Position X="27.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAQAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Core\FFDictionaryEntry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Core.FFmpegEx" Collapsed="true">
+    <Position X="16.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAACAAAAAAAAAAAAAAQAAAAAAAAAAAgAAAAQA=</HashCode>
+      <FileName>Core\FFmpegEx.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Core.GenericMediaLogger&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Core\GenericMediaLogger.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Unosquare.FFME.Core.MediaTypeDictionary&lt;TValue&gt;" Collapsed="true">
+    <Position X="16.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\MediaTypeDictionary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Core.NativeMethods" Collapsed="true">
+    <Position X="20.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAIAEAAAAA=</HashCode>
+      <FileName>Core\NativeMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Core.RC" Collapsed="true">
+    <Position X="25.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAACACABAAAAAAAAAAAQAQAAAABAAA=</HashCode>
+      <FileName>Core\RC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Core.Runner" Collapsed="true">
+    <Position X="16.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAABAAAAAgAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Core\Runner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Core.StreamSpecifier" Collapsed="true">
+    <Position X="20.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAEAAAAAAAAAAAAAABAAAAAQAAAAAA=</HashCode>
+      <FileName>Core\StreamSpecifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Core.Utils" Collapsed="true">
+    <Position X="23.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CIAQAAAgAAQAAABAEgAFAgEBBAmAASQAAhABRAAAAwA=</HashCode>
+      <FileName>Core\Utils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.AudioBlock" Collapsed="true">
+    <Position X="8.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BCCAAAAAACAAAAgAAAAAABAAAAAAAAAAAQAAAAQAUAA=</HashCode>
+      <FileName>Decoding\AudioBlock.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.AudioComponent" Collapsed="true">
+    <Position X="8.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BBACIAEAACCAAAIBAAIAAAAAAAAAAhAEAAAAAAASEIA=</HashCode>
+      <FileName>Decoding\AudioComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.AudioFrame" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAACAAAAgAAgAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Decoding\AudioFrame.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.HardwareAccelerator" Collapsed="true">
+    <Position X="20.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAAAAAAAACEAABAAAAAAAAQIAQAAAAAAAIAAEAAAAAA=</HashCode>
+      <FileName>Decoding\HardwareAccelerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.MediaBlock" Collapsed="true">
+    <Position X="10.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAACACAAwAAAAAAAAAIAAgAAAAAAAAACAQBAA=</HashCode>
+      <FileName>Decoding\MediaBlock.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.MediaBlockBuffer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BsIAAAAAADAAAIgACEAAUAQCAAAIABAMAgAAAABAAIg=</HashCode>
+      <FileName>Decoding\MediaBlockBuffer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.MediaComponent" Collapsed="true">
+    <Position X="10.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GBCQAARAACAKAAgAAIAAQRQAAggIgBAAAAQAAAEKIgA=</HashCode>
+      <FileName>Decoding\MediaComponent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.MediaComponentSet" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACQAAAACCAACAAASAEABBEAAggAhAABAIAABAAIgAg=</HashCode>
+      <FileName>Decoding\MediaComponentSet.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.MediaContainer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IUQQDAgAACIFYLABCJAFChRwEACEYBQECAGARACkKEA=</HashCode>
+      <FileName>Decoding\MediaContainer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.MediaFrame" Collapsed="true">
+    <Position X="2.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAABAAAAECACAAwAAAAAAAAAIACgAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Decoding\MediaFrame.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.PacketQueue" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAGAAAACAAAEBQAAAACBAAAAAAAAARACAA=</HashCode>
+      <FileName>Decoding\PacketQueue.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.SubtitleBlock" Collapsed="true">
+    <Position X="10.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAAAAgAAAAAAAAAAAgAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Decoding\SubtitleBlock.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.SubtitleComponent" Collapsed="true">
+    <Position X="10.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>Decoding\SubtitleComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.SubtitleFrame" Collapsed="true">
+    <Position X="2.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAIAACAAAAggIgAAABAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Decoding\SubtitleFrame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.VideoBlock" Collapsed="true">
+    <Position X="13" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEIABCAAAAgIAAAQkBAAAAAEEAAAAAAAAEQAQAA=</HashCode>
+      <FileName>Decoding\VideoBlock.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.VideoComponent" Collapsed="true">
+    <Position X="13" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABACpAEAACCAAEIDAAIAAABAACAAwBAEAIAAACASAIA=</HashCode>
+      <FileName>Decoding\VideoComponent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.VideoFrame" Collapsed="true">
+    <Position X="5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAACAAAAgAAgAQgBAAAAAEAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Decoding\VideoFrame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.ClosedCaptions.ClosedCaptionCollection" Collapsed="true">
+    <Position X="18.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAARAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Decoding\ClosedCaptions\ClosedCaptionCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Decoding.ClosedCaptions.ClosedCaptionPacket" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAECwABAAAAQEgAQaAIBAAAAAFEAYAiAgjAAAECA=</HashCode>
+      <FileName>Decoding\ClosedCaptions\ClosedCaptionPacket.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Unosquare.FFME.MediaCodecOptions" Collapsed="true">
+    <Position X="23.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAABAAAAAAAAAAAAQAQAAAAAAAAAABAAAA=</HashCode>
+      <FileName>MediaCodecOptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.MediaContainerException" Collapsed="true">
+    <Position X="18.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaContainerException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.MediaElement" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>dZ08WkxXI2fke6y45OnzXhZ16j3kuCnjpxbWuFCOC6U=</HashCode>
+      <FileName>MediaElement.Controller.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Unosquare.FFME.RenderingEventArgs" Collapsed="true">
+    <Position X="2.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAIAAIAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>MediaElement.Events.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.RenderingAudioEventArgs" Collapsed="true">
+    <Position X="5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BACAAAAAAAAAAAAAAAAAAAAAAAAAAgAgAQAAAAQAQAA=</HashCode>
+      <FileName>MediaElement.Events.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.RenderingSubtitlesEventArgs" Collapsed="true">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>MediaElement.Events.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.RenderingVideoEventArgs" Collapsed="true">
+    <Position X="2.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAgQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MediaElement.Events.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.MediaInfo" Collapsed="true">
+    <Position X="22" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QCBDAAAAAAACBAAAAAAAACAAIAgAAAgAQAAAAAAEQAA=</HashCode>
+      <FileName>MediaInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.StreamInfo" Collapsed="true">
+    <Position X="18.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>nAACAAABDQCCCAAIIArAAAAQMAAAAABAAAQsEAAUAAA=</HashCode>
+      <FileName>MediaInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.ChapterInfo" Collapsed="true">
+    <Position X="25.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAIAAgAAAAAAEAAAAEAAA=</HashCode>
+      <FileName>MediaInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.ProgramInfo" Collapsed="true">
+    <Position X="23.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAQAAAAAAAAIACAAAAAEAAA=</HashCode>
+      <FileName>MediaInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.MediaLogMessagEventArgs" Collapsed="true">
+    <Position X="23.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAEAAAAAAAAAAQAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>MediaLogMessagEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.MediaOpeningRoutedEventArgs" Collapsed="true">
+    <Position X="25.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAAAA=</HashCode>
+      <FileName>MediaOpeningRoutedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.MediaOptions" Collapsed="true">
+    <Position X="27.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAQAAACQAAMAIAgACAAAAAAAQCAIIAAAAJAAAAgk=</HashCode>
+      <FileName>MediaOptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Properties.Resources" Collapsed="true">
+    <Position X="27.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Rendering.AudioRenderer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASwGAACACQAAyAgKEgEChAgAABAAAACqZZBAgCAGgA=</HashCode>
+      <FileName>Rendering\AudioRenderer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Unosquare.FFME.Rendering.SubtitleRenderer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQkAAAAAQQAACAACIAAAAAAIAAoAAAAoBAAAACAAAA=</HashCode>
+      <FileName>Rendering\SubtitleRenderer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Unosquare.FFME.Rendering.VideoRenderer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAAAAAAQAACAACAAAAAAAAAQAAAAA8BAAAACgAAA=</HashCode>
+      <FileName>Rendering\VideoRenderer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Unosquare.FFME.Rendering.Wave.WaveFormat" Collapsed="true">
+    <Position X="27.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAgAAAQAAAAAAAAEgAAEAIACECCAAoAgAAAUAAAAEAA=</HashCode>
+      <FileName>Rendering\Wave\WaveFormat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Rendering.Wave.WaveHeader" Collapsed="true">
+    <Position X="16.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAABAAQAAgAAAAAAAAAAIAAAAAAAAAAAAQAAAQIAAA=</HashCode>
+      <FileName>Rendering\Wave\WaveHeader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Rendering.Wave.WaveInterop" Collapsed="true">
+    <Position X="18.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rendering\Wave\WaveInterop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Rendering.Wave.MmException" Collapsed="true">
+    <Position X="18.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAABgAAAAQAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Rendering\Wave\WaveInterop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unosquare.FFME.Rendering.Wave.WaveOutBuffer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAECAQACCEMAAAACAAAUAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Rendering\Wave\WaveOutBuffer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Unosquare.FFME.Rendering.Wave.WavePlayer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAoACwAECAIAAAQIABABAAQACIAAAAQoACCACgAAAI=</HashCode>
+      <FileName>Rendering\Wave\WavePlayer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Struct Name="Unosquare.FFME.Rendering.Wave.MmTime" Collapsed="true">
+    <Position X="16.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEABAQAAAAEAAACCADgAQAADAAAAQAAAAABgIA=</HashCode>
+      <FileName>Rendering\Wave\MmTime.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Unosquare.FFME.Rendering.Wave.WaveOutCapabilities" Collapsed="true">
+    <Position X="18.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EkAAABAEAAEABAoIAAACgAAABMBAAACAAAgYAAEIGAA=</HashCode>
+      <FileName>Rendering\Wave\WaveOutCapabilities.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="Unosquare.FFME.Core.IMediaLogger" Collapsed="true">
+    <Position X="16.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\IMediaLogger.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Unosquare.FFME.Rendering.IRenderer" Collapsed="true">
+    <Position X="18.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAAAAAAQAACAACAAAAAAAAAAAAAAAoBAAAACAAAA=</HashCode>
+      <FileName>Rendering\IRenderer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Unosquare.FFME.Rendering.Wave.IWaveProvider" Collapsed="true">
+    <Position X="20.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rendering\Wave\IWaveProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Unosquare.FFME.Commands.MediaCommandType" Collapsed="true">
+    <Position X="25.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAIAAACAAAAAAABAAAAAAAoAAAAACAAAA=</HashCode>
+      <FileName>Commands\MediaCommandType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Unosquare.FFME.Core.MediaType" Collapsed="true">
+    <Position X="16.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAEAAAAAAAAAAAAAAAAAAAEAAAg=</HashCode>
+      <FileName>Core\MediaType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Unosquare.FFME.Decoding.SeekRequirement" Collapsed="true">
+    <Position X="22" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAEAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Decoding\SeekRequirement.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Unosquare.FFME.Decoding.ClosedCaptions.CCColorType" Collapsed="true">
+    <Position X="16.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQgAAAAAgAAABCAAAAABIAkIBoAAAAAADUCAAA=</HashCode>
+      <FileName>Decoding\ClosedCaptions\CCColorType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Unosquare.FFME.Decoding.ClosedCaptions.CCMiscCommandType" Collapsed="true">
+    <Position X="18.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAEAAEA0AAIAAAAABAIEAAAAAAACAImAAAA=</HashCode>
+      <FileName>Decoding\ClosedCaptions\CCMiscCommandType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Unosquare.FFME.Decoding.ClosedCaptions.CCPacketType" Collapsed="true">
+    <Position X="20.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAIAAAAAAAAAAEAACAAAAAgAAAAEAAACAAiAAAACA=</HashCode>
+      <FileName>Decoding\ClosedCaptions\CCPacketType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Unosquare.FFME.Decoding.ClosedCaptions.CCStyleType" Collapsed="true">
+    <Position X="22" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAACABSgAAQAAgAABBEABAAgBAEDAAAABAAAQDFVQAI=</HashCode>
+      <FileName>Decoding\ClosedCaptions\CCStyleType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Unosquare.FFME.Decoding.ClosedCaptions.CCXdsClassType" Collapsed="true">
+    <Position X="23.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAQAAAAACggAAQAAIAAAAAAAQCgAAAEAQgAAEASAA=</HashCode>
+      <FileName>Decoding\ClosedCaptions\CCXdsClassType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Unosquare.FFME.MediaLogMessageType" Collapsed="true">
+    <Position X="27.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAYAAAAAAABAAAAAAABAAAAAAAEEAAAA=</HashCode>
+      <FileName>MediaLogMessageType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Unosquare.FFME.Rendering.Wave.MmResult" Collapsed="true">
+    <Position X="18.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAJAgBAAIAABAAAIgACAYAgEBFgAAAgkAQIEAACEAQY=</HashCode>
+      <FileName>Rendering\Wave\MmResult.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Unosquare.FFME.Rendering.Wave.PlaybackState" Collapsed="true">
+    <Position X="20.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAIAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rendering\Wave\PlaybackState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Unosquare.FFME.Rendering.Wave.SupportedWaveFormat" Collapsed="true">
+    <Position X="23.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQIIAAABAAFQAAAAAAAAAAAAIAgAAIAAAIgKIBAABA=</HashCode>
+      <FileName>Rendering\Wave\SupportedWaveFormat.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Unosquare.FFME.Rendering.Wave.WaveHeaderFlags" Collapsed="true">
+    <Position X="25.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAQAAAAAAAAEQAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Rendering\Wave\WaveHeaderFlags.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Unosquare.FFME.Rendering.Wave.WaveOutSupport" Collapsed="true">
+    <Position X="27.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAJEAAAAAIA=</HashCode>
+      <FileName>Rendering\Wave\WaveOutSupport.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
